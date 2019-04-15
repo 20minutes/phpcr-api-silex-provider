@@ -59,7 +59,7 @@ class NodeHandler implements SubscribingHandlerInterface
             if ($property['type'] === PropertyType::WEAKREFERENCE) {
                 if (is_array($property['value'])) {
                     foreach ($property['value'] as $subkey=>$subvalue) {
-                        $serialized['properties'][$name]['value'][$subkey] = $repository->getNodeByIdentifier($subkey)->getPath();
+                        $serialized['properties'][$name]['value'][$subkey] = $repository->getNodeByIdentifier($subvalue->getProperty('jcr:uuid')->getValue())->getPath();
                     }
                 } else {
                     $serialized['properties'][$name]['value'] = $repository->getNodeByIdentifier($property['value'])->getPath();
